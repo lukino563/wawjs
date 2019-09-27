@@ -28,8 +28,10 @@ Jednoduchá aproximácia XOR
     const output = net.run([1, 0]);  // [0.987]
 
 ### Popis
-**Využitie:** trénovanie neurónových sietí v javascripte, možnosť prepojenia aj s inými vetvami javasriptu  
-**Kategória:** Command line application, tiež možnosť prepojenia z D3.js pre pridanie grafov, histórie a ďalších užitočných vecí  
+**Využitie:** trénovanie neurónových sietí v javascripte, možnosť prepojenia aj s inými vetvami javasriptu
+
+**Kategória:** Command line application, tiež možnosť prepojenia z D3.js pre pridanie grafov, histórie a ďalších užitočných vecí
+
 **Technológie:** Node.js, D3.js  
   
 ## Chat (Socket.js) 
@@ -55,7 +57,9 @@ Jednoduchý Chat Client, ktorý by sa dal veľmi pekne vylepšiť.
 Doplnenie profilov, sharovanie obrázkov resp. súborov, vytváranie skupín, udalostí
 
 **Využitie:** Chat bot pre skupinu výskumníkov, študentov, pre uzavreté skupiny ale naopak aj pre verejnosť, chat pre support nejakého produktu na stránke
+
 **Kategória:** Browser app / Full-stack / Mobile app
+
 **Technológie:** Node.js, React.js alebo Vue.js pre webového klienta
 
 ## UML Designer (Draw.io)
@@ -70,5 +74,7 @@ https://www.draw.io/
 Dalo by sa vylepšiť odtránením všetkých non-UML templatov a pridanie podpory najnovšieho UML + ďalšie typy diagramov
 
 **Využitie:** kreslenie UML diagramov bez inštalácie zbytočných programov
+
 **Kategória:** Browser app
+
 **Technológie:** Node.js, React.js alebo Vue.js, D3.js pre vykreslovanie
