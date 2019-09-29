@@ -71,9 +71,9 @@ https://stackedit.io/
 ![](images/se.png)
 
 ### Popis
-Dalo by sa vylepšiť prepojen9m s gitom, aby sa dali tiež priamo editovať md súbory a pridávať obrázky.
+Dalo by sa vylepšiť prepojením s githubom, aby sa dali tiež priamo editovať md súbory a pridávať obrázky.
 
-Upravovanie obrázkov priamo v editore a pod.
+Upravovanie obrázkov priamo v editore a pod. Podpora pre diagramy ? 
 
 **Využitie:** editovanie md súborov s ukážkou, bez inštalácie programov
 
