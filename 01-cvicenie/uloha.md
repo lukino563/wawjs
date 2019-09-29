@@ -9,9 +9,6 @@ https://github.com/harthur-org/brain.js/
 https://www.npmjs.com/package/brain.js  
   
 ### Ukážka
-Source na Github:
-https://github.com/socketio/socket.io
-
 Jednoduchá aproximácia XOR
 
     const config = {
@@ -39,7 +36,10 @@ Jednoduchá aproximácia XOR
   
 ## Chat (Socket.js) 
   
-### Ukážka  
+### Ukážka
+Source na Github:
+https://github.com/socketio/socket.io
+
 Jednoduchý Chat Client, ktorý by sa dal veľmi pekne vylepšiť.
 
     $(function () {
@@ -86,4 +86,4 @@ Upravovanie obrázkov priamo v editore a pod. Podpora pre diagramy ?
 
 **Kategória:** Browser app
 
-**Technológie:** Node.js, React.js alebo Vue.js, D3.js pre úpravu obrázkov
+**Technológie:** Node.js, Vue.js, Markdown, AWS-SDK
