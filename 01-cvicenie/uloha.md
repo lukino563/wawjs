@@ -8,7 +8,10 @@
 https://github.com/harthur-org/brain.js/  
 https://www.npmjs.com/package/brain.js  
   
-### Ukážka  
+### Ukážka
+Source na Github:
+https://github.com/socketio/socket.io
+
 Jednoduchá aproximácia XOR
 
     const config = {
@@ -67,7 +70,6 @@ Doplnenie profilov, sharovanie obrázkov resp. súborov, vytváranie skupín, ud
 https://stackedit.io/
 
 ### Ukážka
-
 Source na Github:
 https://github.com/benweet/stackedit
 
