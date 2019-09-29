@@ -2,7 +2,7 @@
   
 - brain - neural networks   
 - socket.io - real-time engine  
-- draw.io - uml designer  
+- stackedit.io - Markdown online editor
   
 ## Neural network training (Brain.js)
 https://github.com/harthur-org/brain.js/  
@@ -62,19 +62,21 @@ Doplnenie profilov, sharovanie obrázkov resp. súborov, vytváranie skupín, ud
 
 **Technológie:** Node.js, React.js alebo Vue.js pre webového klienta
 
-## UML Designer (Draw.io)
+## Markdown Online Editor (stackedit.io)
 
-https://www.draw.io/
+https://stackedit.io/
 
 ### Ukážka
 
-![](images/draw.png)
+![](images/se.png)
 
 ### Popis
-Dalo by sa vylepšiť odtránením všetkých non-UML templatov a pridanie podpory najnovšieho UML + ďalšie typy diagramov
+Dalo by sa vylepšiť prepojením s githubom, aby sa dali tiež priamo editovať md súbory a pridávať obrázky.
 
-**Využitie:** kreslenie UML diagramov bez inštalácie zbytočných programov
+Upravovanie obrázkov priamo v editore a pod. Podpora pre diagramy ? 
+
+**Využitie:** editovanie md súborov s ukážkou, bez inštalácie programov
 
 **Kategória:** Browser app
 
-**Technológie:** Node.js, React.js alebo Vue.js, D3.js pre vykreslovanie
+**Technológie:** Node.js, React.js alebo Vue.js, D3.js pre úpravu obrázkov
