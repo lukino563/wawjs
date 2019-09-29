@@ -68,6 +68,11 @@ https://stackedit.io/
 
 ### Ukážka
 
+Source na Github:
+https://github.com/benweet/stackedit
+
+Zobrazenie v browseri
+
 ![](images/se.png)
 
 ### Popis
