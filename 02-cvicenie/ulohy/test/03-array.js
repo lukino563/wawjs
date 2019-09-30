@@ -3,10 +3,10 @@ describe("Exploratory tests - array api", function() {
   it("length and sparse arrays", function() {
     let a = [1, 2, 3];
     a[10] = 10;
-    // assert(a.length===4);
-    // assert(a.length===11);
+    //assert.strictEqual(a.length, 4);
+    assert(a.length === 11);
     // assert(a.length===10);
-    assert.fail("choose one of the options");
+    //assert.fail("choose one of the options");
   });
   it("length and sparse arrays", function() {
     let a = [1, 2, 3];

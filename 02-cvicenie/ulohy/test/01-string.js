@@ -5,38 +5,34 @@ describe("Exploratory tests - string", function() {
   it("String can be concatenated with + operator", function() {
     let a = "cats";
     let b = "dogs";
-    let c //= ....;
+    let c = a + " and " + b
     assert.strictEqual(c, "cats and dogs");
   });
   it("String can be concatenated with templated literal", function() {
     let a = "cats";
     let b = "dogs";
-    let c //=....;
+    let c = `${a} and ${b}`
     assert.strictEqual(c, "cats and dogs");
   });
   it("Pad all strings to size of longest", function() {
     const strings = ["a", "bb", "ccc"];
-    let result;
-    // ....
-    // ....
-    // ....
-    // ....
+    let max;
+    let result = strings.map(x => x.padStart(strings.reduce(function(a, b) { return a.length > b.length ? a : b }).length);
     assert.deepStrictEqual(result, ["  a", " bb", "ccc"]);
   });
   it("replace all animals in sentence", function() {
     const sentence = "cats ignore dogs";
-    let result;//=... 
+    let result;
     assert.strictEqual(result, " ignore ");
   });
   it("codepoints length", function() {
     let cow="big 🐄";
-    assert(cow.length===6);
+    assert.strictEqual(cow.length, 6);
     
     function lengthCp(str){
-      //return TODO: implement method return string length 
-      // in codepoints, not in characters
+      return Array.from(str).length;
     }
-    assert(lengthCp(cow)===5);
+    assert.strictEqual(lengthCp(cow), 5);
   });
 
 /* Play with other APIs
