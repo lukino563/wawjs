@@ -3,10 +3,10 @@ describe("Exploratory tests - 4 equality algs", function() {
   it("== (Abstract)", function() {
     // doplnte rue false miesto null
     assert.strictEqual(null == undefined, true);
-    assert.strictEqual(0 == -0, true);
+    assert.strictEqual(0 == -0,true);
     assert.strictEqual(0 == "0", true);
     assert.strictEqual(NaN == NaN, false);
-    assert.strictEqual({} == {}, false);
+    assert.strictEqual({} == {},false);
   });
   it("=== (Strict)", function() {
     assert.strictEqual(null === undefined, false)
@@ -29,7 +29,8 @@ describe("Exploratory tests - 4 equality algs", function() {
   });
   it("implement function sameValueZeroEqual", function() {
     function sameValueZeroEqual(a, b) {
-      return [a].includes(b);
+    	return [a].includes(b);
+    	//...
     }
     assert.equal(sameValueZeroEqual(0, -0), true);
     assert.equal(sameValueZeroEqual(1, "1"), false);
