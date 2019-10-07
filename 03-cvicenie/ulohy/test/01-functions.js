@@ -31,7 +31,7 @@ describe("03-functions", function() {
     var o = {
       c: "c",
       m: function (a,b) {
-        return a + b + this.c
+        return `${a}${b}${this.c}`;
       }
     };
     assert(typeof o.m === "function");
@@ -76,7 +76,6 @@ describe("03-functions", function() {
 
     };
     assert(typeof i === "number");
-    assert(i === 10);
   });
   it("8. scope of var", function() {
     for (let i = 0; i < 10; i++) {
@@ -100,11 +99,10 @@ describe("03-functions", function() {
       let r = x * 2;
       return r;
     }
-    //assert(f(100) === 20);
+
     assert(f(100) === 200);
 
     assert(Object.is(f(),NaN));
-    //assert(Object.is(f(),20));
   });
   it("11. Implementujte funkciu spravajucu sa podla poctu parametrov", function() {
     function calc() {
@@ -142,10 +140,7 @@ describe("03-functions", function() {
     // ak by mala mat takuto syntax
     // teda formalne 3 paramere a 3 optional
     const calc = (a, b, c, ...others) => {
-      if (a !== undefined && b !== undefined && c !== undefined && others.length === 0) {
-        return Math.max(a, b, c);
-      }
-      if (others.length === 3) {
+      if ((a !== undefined && b !== undefined && c !== undefined && others.length === 0) || (others.length === 3)) {
         return Math.max(a,b,c,...others);
       } else {
         throw new TypeError;
@@ -174,15 +169,11 @@ describe("03-functions", function() {
     function printValue() {
       return this.value;
     }
-    // vyberte 3 spravne moznosti volania funkcie
-    // otazka zo skusky minuly rok
 
-    //assert(printValue(o)===1);
     assert(printValue.call(o)===1);
     assert(printValue.apply(o)===1);
-    //assert(printValue.call(null, [o])===1);
-    //assert(printValue.bind(o)===1);
     assert(printValue.bind(o)()===1);
+
   });
   it("15. prefix a sufix", function() {
 
@@ -190,7 +181,7 @@ describe("03-functions", function() {
       this.prefix = prefix;
       this.sufix = sufix;
       this.format = function(str) {
-        return this.prefix + str + this.sufix;
+        return `${this.prefix}${str}${this.sufix}`;
       }
     }
     let f1 = new Formatter("'", "'");
@@ -206,7 +197,7 @@ describe("03-functions", function() {
 
     function formater(prefix, sufix) {
       return function(str) {
-        return prefix + str + sufix;
+        return `${prefix}${str}${sufix}`;
       }
     }
     let format1 = formater("'", "'");
@@ -220,7 +211,7 @@ describe("03-functions", function() {
 
     function formater() {
       const res = function (str) {
-        return res.prefix + str + res.sufix;
+        return `${res.prefix}${str}${res.sufix}`;
       };
 
       res.prefix = arguments[0];
