@@ -83,13 +83,12 @@ describe("Creating objects", function() {
     assert.deepStrictEqual(arr, ["a", "b", "c", 666], "this is standard behavior");
 
     function typedArray(arr) {
-      Object.defineProperty(arr,"push", {
+      return Object.defineProperty(arr,"push", {
         value : function (...args) {
           args = args.filter(s => typeof s == "string");
           return Array.prototype.push.apply(this, args);
         }
       });
-      return arr;
     }
     let orig = ["a", "b", "c"];
     let arr2 = typedArray(orig);
