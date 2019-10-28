@@ -6,10 +6,20 @@ const path = require("path");
 
 
 function writeTempFile(fileName, ...args) {
-  // just hints:
-  // const cb = args.pop();
-  // const tempDir = path.join(os.tmpdir(), `${process.pid}-`);
-  // fs.mkdtemp(tempDir, (err, folder) => {  
-  // fs.writeFile(tempFile, ...args, (err) => {
-         
+  const cb = args.pop();
+
+  const tmpDir = path.join(os.tmpdir(), `${process.pid}-`);
+  fs.mkdtemp(tmpDir, (err, folder) => {
+      if (err) return cb(err)
+
+      const tmpFile = path.resolve(folder, fileName);
+      try {
+          fs.writeFile(tmpFile, ...args, (err) => {
+              if (err) return cb(err)
+              cb(null, tmpFile)
+          })
+      } catch (ex) {
+        cb(ex)
+      }
+  })
 }
