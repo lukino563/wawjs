@@ -17,8 +17,7 @@ describe("FP - array functions", function() {
   it("02-students without git repo", () => {
     // pozrite si strukturu objektov v poli a implementujte
     // zoznam studentov ktorym chyba git repo
-    let missingGit = []; //TODO: implement
-
+    let missingGit = students.filter(({git}) => !git)
 
     //debug(JSON.stringify(missingGit, null, 2));
     assert.deepStrictEqual(
@@ -27,14 +26,23 @@ describe("FP - array functions", function() {
     )
   });
 
-  function fixProjects(student) { return { ...student } }
+  function fixProjects(student) {
+    let projects = student.projects;
+
+    projects = projects ? projects.split(',').map(p => p.trim()).filter(Boolean) : [];
+
+    return {
+      ...student,
+      projects: projects
+    }
+  }
 
   it("03-students with better project structure", () => {
     // TODO: student.project is string delimited by ","
     // change ot to better structure []
     // split by semicolon, remove empty etc...
     // implementacia ma byt v reusable funkcii fixProjects
-    // o par riadkov vyzsie 
+    // o par riadkov vyzsie s
     let students3 = students.map(fixProjects);
 
     //debug(JSON.stringify(students3, null, 2));
@@ -48,8 +56,7 @@ describe("FP - array functions", function() {
     // by ste uz lahko mali najst studentov 
     // z menej ako 3ma projektami
     let students4 = students
-      .map(fixProjects)
-    // TODO:
+      .map(fixProjects).filter((value) => (value.projects.length < 3))
 
     //debug(JSON.stringify(students4, null, 2));
     assert.deepStrictEqual(
@@ -60,11 +67,15 @@ describe("FP - array functions", function() {
 
 
   function fixPoints(student) {
+
+    let keys = Object.keys(student).filter(props => props.match('points'));
+    let points = keys.map(k => student[k]);
+
     return {
       // vrati original properties studenta
       ...student,
       // a dopocitanu novu property points
-      points: [] //TODO: implement
+      points: points
     }
   }
 
@@ -87,7 +98,7 @@ describe("FP - array functions", function() {
 
   
   function totalPoints(student) {
-    // TODO: implementujte
+    return student.points.reduce((p, c) => p+c, 0);
   }
 
   it("06-total points of each student", () => {
@@ -111,7 +122,7 @@ describe("FP - array functions", function() {
     let sumOfAll = students
       .map(fixPoints)
       .map(totalPoints)
-      //.????()
+      .reduce((p, c) => p+c, 0)
 
     debug(sumOfAll);
     assert(sumOfAll === 924);
@@ -138,12 +149,18 @@ describe("FP - array functions", function() {
     // vysledok ma vyzerat tak ako v group-by-project.json
     
     let groupedByProject = students
-      .map(fixProjects)
-      .reduce((uniqueProjects, student) => {
-        // TODO: 
+    .map(fixProjects)
+    .reduce((uniqueProjects, student) => {
+      
+      student.projects.forEach((project) =>{
+        uniqueProjects.has(project) || uniqueProjects.set(project, []);
+        uniqueProjects.get(project).push(student);
+      });
 
-      }, new Map())
-    // convert map entries to array
+      return uniqueProjects;
+
+    }, new Map());
+
     groupedByProject = [...groupedByProject];
     
     //debug(JSON.stringify(groupedByProject, null, 2));
@@ -160,10 +177,22 @@ describe("FP - array functions", function() {
     // aby vysledok vysiel podla duplicate-projects.json
     let duplicateProjects = students
       .map(fixProjects)
-      //. TODO:
-      //.
-      //.
-      //
+      .reduce((uniqueProjects, student) => {
+      
+        student["projects"].forEach((project) =>{
+          uniqueProjects.has(project) || uniqueProjects.set(project, []);
+          uniqueProjects.get(project).push(student['#']);
+        });
+  
+        return uniqueProjects;
+  
+      }, new Map());
+    duplicateProjects = [...duplicateProjects];
+
+    duplicateProjects = duplicateProjects.map((value) => {
+      return { project: value[0], students: value[1] }
+    }).filter((value) => value.students.length > 1);
+
     debug(JSON.stringify(duplicateProjects, null, 2));
     assert.deepStrictEqual(
       duplicateProjects,
