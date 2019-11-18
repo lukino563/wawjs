@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "SELF_TEST=1 node ./src/and.js && SELF_TEST=1 node ./src/deepFreeze.js && SELF_TEST=1 node ./src/max.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "traverse": "^0.6.6"
+  },
+  "devDependencies": {
+    "mocha": "^6.2.2"
   }
 }

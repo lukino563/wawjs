@@ -1,12 +1,22 @@
 'use strict'
 const traverse = require("traverse");
 
+function logParams(fn){
+  return function(...args){
+    console.log(...args)
+    return fn.call(this, ...args)
+    
+  }
+
+}
+
 module.exports = function(o) {
   traverse.forEach(o, function() {
-    this.post(({ node }) => Object.freeze(node));
+    this.post(({ node }) => logParams(Object.freeze)(node));
   });
   return o;
 }
+
 //-------------------------- tests ----------------------------------------
 process.env.SELF_TEST && ((deepFreeze) => {
   console.error(`[self test]:${__filename}:...`)

@@ -27,11 +27,11 @@ const maxNumber = fn(Math.max, isNumber);
 // dole v teste je napisane ake spravanie ocakavame
 // implementacia by mala pouzit existujuce Math a Number APIs
 // 
-const minNumber = 
-const minInteger = 
-const minFinite = 
-const isNegative = 
-const maxNegativeInteger = 
+const minNumber = fn(Math.min, isNumber);
+const minInteger = fn(Math.min, Number.isInteger);
+const minFinite = fn(Math.min, Number.isFinite);
+const isNegative = fn(Math.sign, (a) => a < 0);
+const maxNegativeInteger = fn(Math.sign, isNegative, Number.isInteger);
 //const maxNegativeInteger = 
 
 // 7.   priklad ma demonstrovat ako dokazeme
@@ -44,7 +44,7 @@ const maxNegativeInteger =
 // a ine filtre
 const { isStringObject } = require("util").types;
 const isString = s => typeof s === "string";
-const concat = 
+const concat = (s, ...args) => s.concat(...args);
 //   
 const concatSafe = fn(concat, or(isNumber, isString, isStringObject));
 
@@ -94,7 +94,5 @@ process.env.SELF_TEST && (() => {
   assert.equal(concatSafe('a', 7, String('b'), 'c', new Date(2020, 1, 1), true), 'a7bc');
 
   console.error(`[self test]:${__filename}:OK`)
-
-
 
 })();
