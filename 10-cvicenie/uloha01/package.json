@@ -1,0 +1,24 @@
+{
+  "name": "http-zipper",
+  "version": "1.0.0",
+  "description": "Uloha 1 - Klient pošle súbor na server, server ho zazipuje a pošle ho naspäť",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --color --recursive test/"
+  },
+  "keywords": [
+    "node",
+    "client",
+    "server",
+    "gzip",
+    "stream"
+  ],
+  "author": "Lukáš Machata",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^6.2.2"
+  }
+}
