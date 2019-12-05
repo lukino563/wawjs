@@ -14,7 +14,7 @@ function zipper_client(file) {
       console.error('Error openning file');
       return;
     }
-
+    
     const req = http.request(
       { 
         host: 'localhost', 

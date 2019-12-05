@@ -8,8 +8,6 @@ module.exports = zipper_server;
 
 function zipper_server(path) {
 
-  let zip = zlib.createDeflate({flush : zlib.constants.Z_SYNC_FLUSH});
-
   const requestHandler = (request, response) => {
 
     fs.mkdir(path, () => {
@@ -22,12 +20,11 @@ function zipper_server(path) {
         }
       });
 
-      pipeline(request, zip, response,(err) => {
+      pipeline(request, zlib.createGzip(), response,()=>{
         if (err) {
           console.error("Error sending zipped file");
         }
       });
-
     });
   }
 
