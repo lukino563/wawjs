@@ -10,9 +10,11 @@ function zipper_server(path) {
 
   const requestHandler = (request, response) => {
 
+    let gzip = zlib.createGzip();
+
     fs.mkdir(path, () => {
       const filename = request.headers['content-filename'];
-      const writeStream = fs.createWriteStream(`${path}/${filename}`, {encoding : 'binary'});
+      const writeStream = fs.createWriteStream(`${path}/${filename}`);
 
       pipeline(request, writeStream, (err) => {
         if (err) {
@@ -20,7 +22,7 @@ function zipper_server(path) {
         }
       });
 
-      pipeline(request, zlib.createGzip(), response,()=>{
+      pipeline(request, gzip, response, (err)=>{
         if (err) {
           console.error("Error sending zipped file");
         }

@@ -6,8 +6,8 @@ module.exports = zipper_client;
 
 function zipper_client(file) {
 
-  const readStream = fs.createReadStream(file, {encoding : 'binary'});
-  const writeStream = fs.createWriteStream(`${file}.gz`, {encoding : 'binary'});
+  const readStream = fs.createReadStream(file);
+  const writeStream = fs.createWriteStream(`${file}.gz`);
 
   fs.stat(file, (err, stats) => {
     if (err){
@@ -32,6 +32,10 @@ function zipper_client(file) {
           if (err) {
             console.error("Error writing received file");
           }
+        });
+
+        writeStream.on('finish', ()=>{
+          console.log('File received');
         });
       }
     );
