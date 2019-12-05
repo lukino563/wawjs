@@ -1,11 +1,13 @@
 const http = require('http');
 const fs = require('fs');
+const path = require('path');
 const { pipeline } = require("stream");
 
 module.exports = zipper_client;
 
 function zipper_client(port, file) {
 
+  file = path.parse(file).base;
   const readStream = fs.createReadStream(file);
   const writeStream = fs.createWriteStream(`${file}.gz`);
 
