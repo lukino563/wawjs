@@ -4,33 +4,40 @@ const fs = require('fs');
 const port = 5634;
 const { pipeline } = require("stream");
 
-const savePath = process.argv[2];
+module.exports = zipper_server;
 
-const requestHandler = (request, response) => {
+function zipper_server(path) {
 
-  fs.mkdir(savePath, () => {
-    const filename = request.headers['content-filename'];
-    const writeStream = fs.createWriteStream(`${savePath}/${filename}`);
+  let zip = zlib.createDeflate({flush : zlib.constants.Z_SYNC_FLUSH});
 
-    pipeline(request, writeStream, (err) => {
-      if (err) {
-        console.error("Error writing received file");
-      }
+  const requestHandler = (request, response) => {
+
+    fs.mkdir(path, () => {
+      const filename = request.headers['content-filename'];
+      const writeStream = fs.createWriteStream(`${path}/${filename}`, {encoding : 'binary'});
+
+      pipeline(request, writeStream, (err) => {
+        if (err) {
+          console.error("Error writing received file");
+        }
+      });
+
+      pipeline(request, zip, response,(err) => {
+        if (err) {
+          console.error("Error sending zipped file");
+        }
+      });
 
     });
-    pipeline(request, zlib.createGzip(), response, (err) => {
-      if (err) {
-        console.error("Error seding zipped file");
-      }
-    });
+  }
+
+  const server = http.createServer(requestHandler).on('error', (err) => {
+    return console.error('Error on server occured:', err.code);
   });
+
+
+  server.listen(port, () => {
+    console.log(`Listening on PORT: ${port}`);
+  });
+
 }
-
-const server = http.createServer(requestHandler).on('error', (err) => {
-  return console.error('Error on server occured:', err.code);
-});
-
-
-server.listen(port, () => {
-  console.log(`Listening on PORT: ${port}`);
-});

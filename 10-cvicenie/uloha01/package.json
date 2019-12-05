@@ -19,6 +19,7 @@
   "author": "Lukáš Machata",
   "license": "ISC",
   "devDependencies": {
-    "mocha": "^6.2.2"
+    "mocha": "^6.2.2",
+    "nock": "^11.7.0"
   }
 }
