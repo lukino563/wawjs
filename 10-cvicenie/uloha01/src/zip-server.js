@@ -30,13 +30,8 @@ function zipper_server(path) {
     });
   }
 
-  const server = http.createServer(requestHandler).on('error', (err) => {
+  return http.createServer(requestHandler).on('error', (err) => {
     return console.error('Error on server occured:', err.code);
-  });
-
-
-  server.listen(port, () => {
-    console.log(`Listening on PORT: ${port}`);
   });
 
 }
