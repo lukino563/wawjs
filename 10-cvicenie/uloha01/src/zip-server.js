@@ -1,7 +1,6 @@
 const http = require('http');
 const zlib = require('zlib');
 const fs = require('fs');
-const port = 5634;
 const { pipeline } = require("stream");
 
 module.exports = zipper_server;
@@ -18,20 +17,20 @@ function zipper_server(path) {
 
       pipeline(request, writeStream, (err) => {
         if (err) {
-          console.error("Error writing received file");
+          console.debug("SERVER: Error writing received file");
         }
       });
 
       pipeline(request, gzip, response, (err)=>{
         if (err) {
-          console.error("Error sending zipped file");
+          console.debug("SERVER: Error sending zipped file");
         }
       });
     });
   }
 
   return http.createServer(requestHandler).on('error', (err) => {
-    return console.error('Error on server occured:', err.code);
+    return console.error('SERVER: Error on server occured:', err.code);
   });
 
 }
