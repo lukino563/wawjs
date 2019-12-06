@@ -7,7 +7,6 @@ module.exports = zipper_client;
 
 function zipper_client(port, file) {
 
-  file = path.parse(file).base;
   const readStream = fs.createReadStream(file);
   const writeStream = fs.createWriteStream(`${file}.gz`);
 
@@ -18,16 +17,10 @@ function zipper_client(port, file) {
       method: 'POST',
     },
     response => {
-      console.log(`Response code: ${response.statusCode}`);
-
       pipeline(response, writeStream, (err) => {
         if (err) {
           console.error("Error writing received file");
         }
-      });
-
-      writeStream.on('finish', ()=>{
-        console.log('File received');
       });
     }
   );
@@ -39,7 +32,7 @@ function zipper_client(port, file) {
     }
 
     req.setHeader('Content-Length', stats.size);
-    req.setHeader('Content-Filename', file);
+    req.setHeader('Content-Filename', path.parse(file).base);
 
     pipeline(readStream, req, (err) => {
       if (err) {
