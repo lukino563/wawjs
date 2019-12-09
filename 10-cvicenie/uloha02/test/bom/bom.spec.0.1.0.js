@@ -63,7 +63,6 @@ describe("bom.js tests", function() {
         let chunk = Buffer.concat(chunks);
 
         fs.readFile(file, (err, data) => {
-          console.log(JSON.stringify(data) + JSON.stringify(chunk))
           assert(
             chunk.equals(data.slice(3)),
             `unexpected \n${JSON.stringify(chunk)}`
