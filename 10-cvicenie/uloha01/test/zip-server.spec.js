@@ -9,41 +9,37 @@ const port = 5634;
 const file = `${__dirname}/testfile.bin`;
 const dir = `${__dirname}/testdir`;
 
-function sleep(ms){
-    return new Promise(resolve=>{
-        setTimeout(resolve,ms)
-    })
-}
+let srv;
 
-describe("Zipper Tests", function() {
+describe("Zipper Tests", () => {
 
-    it("Server is unreachable", async function() {
-    
-        client(port, file);
-        await sleep(1000);
-        assert(!fs.existsSync(`${__dirname}/${path.parse(file).base}.gz`));
+    it("Server is unreachable", () => {
+
+        client(port, file).on('close', () => {
+            assert(!fs.existsSync(`${__dirname}/${path.parse(file).base}.gz`));
+        });
 
     });
-    it("File is correctly sent", function() {
 
-        const srv = server(dir).listen(port);
-        
-        client(port, file).on('finish', () => {
+    it("File is correctly sent", () => {
+
+        srv = server(dir).listen(port);
+
+        client(port, file).on('finish', ()=>{
             srv.close();
         });
 
-        srv.on('finish', ()=> {
-
+        srv.on('close', () => {
             const f1 = fs.readFileSync(file);
             const f2 = fs.readFileSync(`${dir}/testfile.bin`);
-    
+            
             const h1 = crypto.createHash('sha1').update(f1).digest().toString();
             const h2 = crypto.createHash('sha1').update(f2).digest().toString();
-    
-            console.log(h1, h2);
+            
             assert(h1 == h2);
 
+            fs.unlinkSync(`${dir}/testfile.bin`);
+            fs.unlinkSync(`${__dirname}/${path.parse(file).base}.gz`);
         });
-
     });
 });

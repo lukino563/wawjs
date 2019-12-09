@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node test/zip-server.demo.js test/testfile.bin",
-    "test": "mocha --color test/zip-server.spec.js"
+    "test": "mocha --timeout 20000 --color test/zip-server.spec.js"
   },
   "keywords": [
     "node",

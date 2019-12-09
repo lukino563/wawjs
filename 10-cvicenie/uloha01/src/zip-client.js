@@ -19,7 +19,7 @@ function zipper_client(port, file) {
     response => {
       pipeline(response, writeStream, (err) => {
         if (err) {
-          console.debug("CLIENT: Error writing received file");
+          //console.debug("CLIENT: Error writing received file");
         }
       });
     }
@@ -27,7 +27,7 @@ function zipper_client(port, file) {
 
   fs.stat(file, (err, stats) => {
     if (err){
-      console.debug('CLIENT: Error openning file');
+      //console.debug('CLIENT: Error openning file');
       return;
     }
 
@@ -37,7 +37,7 @@ function zipper_client(port, file) {
     pipeline(readStream, req, (err) => {
       if (err) {
         fs.unlinkSync(`${file}.gz`);
-        console.debug("CLIENT: Error sending file");
+        //console.debug("CLIENT: Error sending file");
       }
     });
   });

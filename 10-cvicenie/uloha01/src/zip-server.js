@@ -17,13 +17,13 @@ function zipper_server(path) {
 
       pipeline(request, writeStream, (err) => {
         if (err) {
-          console.debug("SERVER: Error writing received file");
+          //console.debug("SERVER: Error writing received file");
         }
       });
 
       pipeline(request, gzip, response, (err)=>{
         if (err) {
-          console.debug("SERVER: Error sending zipped file");
+          //console.debug("SERVER: Error sending zipped file");
         }
       });
     });
