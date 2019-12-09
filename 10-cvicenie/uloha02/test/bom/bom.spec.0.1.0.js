@@ -8,18 +8,13 @@ describe("bom.js tests", function() {
 
   const bomBuffer = Buffer.from([0xEF, 0xBB, 0xBF])
 
-  // 3. define first test
   it("remove bom - shell remove bom from file, which not contain bom", function(done) {
 
-    // collect all chunks, for asserts
     var chunks = [];
 
-    // 4. create sample files
     let file = `${__dirname}/data/without-bom.txt`;
     fs.createReadStream(file)
-      // !!!
       .pipe(bom.remove())
-      // !!!
       .on("error", done)
       .on("data", (chunk) => chunks.push(chunk))
       .on("finish", () => {
@@ -68,8 +63,9 @@ describe("bom.js tests", function() {
         let chunk = Buffer.concat(chunks);
 
         fs.readFile(file, (err, data) => {
+          console.log(JSON.stringify(data) + JSON.stringify(chunk))
           assert(
-            chunk.equals(data.slice(4)),
+            chunk.equals(data.slice(3)),
             `unexpected \n${JSON.stringify(chunk)}`
           );
           done();
@@ -93,7 +89,7 @@ describe("bom.js tests", function() {
 
         fs.readFile(file, (err, data) => {
           assert(
-            chunk.equals(data.slice(4)),
+            chunk.equals(data.slice(3)),
             `unexpected \n${JSON.stringify(chunk)}`
           );
           done();

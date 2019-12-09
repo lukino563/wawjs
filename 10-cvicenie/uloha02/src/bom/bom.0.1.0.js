@@ -71,7 +71,7 @@ class RemoveBom extends Transform {
     _pushBuffered() {
         let chunk = Buffer.concat([...this._buff]);
         if (hasBom(chunk)) {
-            this.push(chunk.slice(4));
+            this.push(chunk.slice(3));
         } else {
             this.push(chunk);
         }
