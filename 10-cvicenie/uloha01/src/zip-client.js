@@ -19,6 +19,7 @@ function zipper_client(port, file) {
     response => {
       pipeline(response, writeStream, (err) => {
         if (err) {
+          fs.unlinkSync(`${file}.gz`);
           //console.debug("CLIENT: Error writing received file");
         }
       });
@@ -44,6 +45,3 @@ function zipper_client(port, file) {
 
   return req;
 }
-
-if (process.argv[2])
-  zipper_client(5634, process.argv[2])

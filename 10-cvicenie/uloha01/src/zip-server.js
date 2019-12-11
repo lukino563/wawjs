@@ -18,12 +18,17 @@ function zipper_server(path) {
       pipeline(request, writeStream, (err) => {
         if (err) {
           //console.debug("SERVER: Error writing received file");
+          fs.unlinkSync(`${path}/${filename}`);
         }
       });
 
       pipeline(request, gzip, response, (err)=>{
         if (err) {
           //console.debug("SERVER: Error sending zipped file");
+
+          //end connection on error
+          response.statusCode = 500;
+          response.end();
         }
       });
     });
@@ -34,5 +39,3 @@ function zipper_server(path) {
   });
 
 }
-
-zipper_server(process.argv[2] ? process.argv[2] : 'testdir');
