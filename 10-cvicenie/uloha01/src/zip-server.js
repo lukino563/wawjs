@@ -18,6 +18,7 @@ function zipper_server(path) {
       pipeline(request, writeStream, (err) => {
         if (err) {
           //console.debug("SERVER: Error writing received file");
+          writeStream.destroy();
           fs.unlinkSync(`${path}/${filename}`);
         }
       });

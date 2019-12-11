@@ -19,6 +19,7 @@ function zipper_client(port, file) {
     response => {
       pipeline(response, writeStream, (err) => {
         if (err || response.statusCode === 500) {
+          writeStream.destroy();
           fs.unlinkSync(`${file}.gz`);
           //console.debug("CLIENT: Error writing received file");
         }
@@ -38,6 +39,7 @@ function zipper_client(port, file) {
     pipeline(readStream, req, (err) => {
       if (err) {
         fs.unlinkSync(`${file}.gz`);
+        req.destroy();
         //console.debug("CLIENT: Error sending file");
       }
     });
