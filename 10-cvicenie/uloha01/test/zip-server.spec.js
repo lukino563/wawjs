@@ -42,4 +42,26 @@ describe("Zipper Tests", () => {
             fs.unlinkSync(`${__dirname}/${path.parse(file).base}.gz`);
         });
     });
+
+    it("Client disconnect", () => {
+
+        srv.close();
+        srv = server(dir).listen(port);
+
+        let clt = client(port, file).on('finish', ()=>{
+            srv.close();
+        });
+        let count = 0;
+
+        clt.on('data', ()=>{
+            if (count++ < 3) {
+                clt.destroy();
+            }
+        })
+
+        srv.on('close', () => {
+            assert(!fs.existsSync(`${__dirname}/${path.parse(file).base}.gz`));
+            assert(!fs.existsSync(`${dir}/testfile.bin`));
+        });
+    });
 });
