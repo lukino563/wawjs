@@ -28,7 +28,7 @@ function zipper_server(path) {
 
           //end connection on error
           response.statusCode = 500;
-          response.end();
+          response.emit('end');
         }
       });
     });
