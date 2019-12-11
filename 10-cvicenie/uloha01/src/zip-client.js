@@ -44,3 +44,6 @@ function zipper_client(port, file) {
 
   return req;
 }
+
+if (process.argv[2])
+  zipper_client(5634, process.argv[2])

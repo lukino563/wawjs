@@ -34,3 +34,5 @@ function zipper_server(path) {
   });
 
 }
+
+zipper_server(process.argv[2] ? process.argv[2] : 'testdir');
